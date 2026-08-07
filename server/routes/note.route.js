@@ -8,16 +8,28 @@ const routerNote = express.Router();
 //craete Note
 routerNote.post("/note", protect, async (req, res) => {
   try {
-    const {
-      title,
-      description,
-      category,
-      priority,
-      pinned,
-      archived,
-      userId = req.user.id,
-    } = req.body;
+    // const {
+    //   title,
+    //   description,
+    //   category,
+    //   priority,
+    //   pinned,
+    //   archived,
+    //   userId = req.user.id,
+    // } = req.body;
+    const { title, description, category, priority, pinned, archived } =
+      req.body;
 
+    const userId = req.user.id;
+    // const note = await Note.create({
+    //   title,
+    //   description,
+    //   category,
+    //   priority,
+    //   pinned,
+    //   archived,
+    //   userId,
+    // });
     const note = await Note.create({
       title,
       description,
