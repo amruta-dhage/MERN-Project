@@ -10,7 +10,6 @@ export const getNotes = async (
   page = 1,
   limit = 5
 ) => {
-  const token = localStorage.getItem("token");
 
   const response = await axios.get(
     `${API_URL}/note?search=${search}&page=${page}&limit=${limit}`,
