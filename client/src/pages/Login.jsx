@@ -11,13 +11,21 @@ function Login() {
   } = useForm();
   const navigate = useNavigate();
   const API_URL = import.meta.env.VITE_API_URL;
+  console.log(API_URL)
   const onSubmit = async (data) => {
     try {
+      const loginUrl = `${API_URL}/login`;
+
+      console.log("========== LOGIN DEBUG ==========");
+      console.log("API_URL:", API_URL);
+      console.log("LOGIN URL:", loginUrl);
+      console.log("=================================");
       const response = await axios.post(
         `${API_URL}/login`,
         data,
       );
       console.log(response);
+      console.log("LOGIN RESPONSE:", response);
       toast.success(response?.data?.message)
       const userToken = response.data.token;
       localStorage.setItem("token", userToken);
