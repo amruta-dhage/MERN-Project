@@ -13,7 +13,7 @@ export const getNotes = async (
   const token = localStorage.getItem("token");
 
   const response = await axios.get(
-    `${API_URL}?search=${search}&page=${page}&limit=${limit}`,
+    `${API_URL}/note?search=${search}&page=${page}&limit=${limit}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -26,7 +26,7 @@ export const getNotes = async (
 export const addNote = async (data) => {
 
   try {
-    const response = await axios.post(`${API_URL}`, data, {
+    const response = await axios.post(`${API_URL}/note`, data, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -46,7 +46,7 @@ export const addNote = async (data) => {
 export const editNote = async (data, id) => {
   console.log(data)
   try {
-    const response = await axios.put(`${API_URL}/${id}`, data, {
+    const response = await axios.put(`${API_URL}/note/${id}`, data, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -61,7 +61,7 @@ export const editNote = async (data, id) => {
 
 export const deleteNote = async (id) => {
   try {
-    const response = await axios.delete(`${API_URL}/${id}`, {
+    const response = await axios.delete(`${API_URL}/note/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
