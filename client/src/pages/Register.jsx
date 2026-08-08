@@ -10,11 +10,17 @@ function Register() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const API_URL = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
+  const API_URL = import.meta.env.VITE_API_URL;
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post(`${API_URL}/user`, data);
+      const loginUrl = `${API_URL}/login`;
+
+      console.log("========== REGISTER DEBUG ==========");
+      console.log("API_URL:", API_URL);
+      console.log("REGISTER URL:", loginUrl);
+      console.log("=================================");
+      const response = await axios.post(`${loginUrl}/user`, data);
       console.log(response);
       toast.success(response?.data?.message)
       navigate("/");
