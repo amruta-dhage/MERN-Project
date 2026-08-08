@@ -21,7 +21,7 @@ function Login() {
       console.log("LOGIN URL:", loginUrl);
       console.log("=================================");
       const response = await axios.post(
-        `${loginUrl}/login`,
+        `${loginUrl}`,
         data,
       );
       console.log(response);

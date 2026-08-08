@@ -14,13 +14,13 @@ function Register() {
   const API_URL = import.meta.env.VITE_API_URL;
   const onSubmit = async (data) => {
     try {
-      const loginUrl = `${API_URL}/login`;
+      const loginUrl = `${API_URL}/user`;
 
       console.log("========== REGISTER DEBUG ==========");
       console.log("API_URL:", API_URL);
       console.log("REGISTER URL:", loginUrl);
       console.log("=================================");
-      const response = await axios.post(`${loginUrl}/user`, data);
+      const response = await axios.post(`${loginUrl}`, data);
       console.log(response);
       toast.success(response?.data?.message)
       navigate("/");
