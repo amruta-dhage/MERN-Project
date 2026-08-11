@@ -167,7 +167,7 @@ function Dashboard() {
   }
   return (
     <>
-      <div className="flex flex-col md:flex-row justify-between  mb-5">
+      <div className="flex flex-col md:flex-row justify-between mt-10 mb-5">
         <button onClick={() => handleAdd()} className="bg-indigo-600  hover:bg-indigo-700 text-white px-5 py-3 rounded-lg flex items-center gap-2">
           <AddIcon /> Add Note
         </button>

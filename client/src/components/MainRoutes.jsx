@@ -5,6 +5,7 @@ import Dashboard from "../pages/Dashboard";
 import Profile from "../pages/Profile";
 import DashboardLayout from "../layouts/DashboardLayout";
 import ProtectedRoute from "./ProtectedRoute";
+import Notes from "../pages/Notes";
 
 const MainRoutes = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const MainRoutes = createBrowserRouter([
             element: <Dashboard />,
           },
 
+          {
+            path: "/notes",
+            element: <Notes />,
+          },
           {
             path: "/profile",
             element: <Profile />,
