@@ -14,7 +14,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate("/login", { replace: true });
+    navigate("/", { replace: true });
   };
 
   const menuItems = [
