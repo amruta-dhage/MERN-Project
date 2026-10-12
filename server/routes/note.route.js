@@ -8,15 +8,6 @@ const routerNote = express.Router();
 //craete Note
 routerNote.post("/note", protect, async (req, res) => {
   try {
-    // const {
-    //   title,
-    //   description,
-    //   category,
-    //   priority,
-    //   pinned,
-    //   archived,
-    //   userId = req.user.id,
-    // } = req.body;
     const { title, description, category, priority, pinned, archived } =
       req.body;
 
@@ -131,12 +122,56 @@ routerNote.get("/note", protect, async (req, res) => {
   }
 });
 //update Note
+// routerNote.put("/note/:id", protect, async (req, res) => {
+//   try {
+//     const updatedNote = await Note.findByIdAndUpdate(req.params.id, req.body, {
+//       new: true,
+//       runValidators: true,
+//     });
+
+//     if (!updatedNote) {
+//       return res.status(404).json({
+//         success: false,
+//         message: "Note not found",
+//       });
+//     }
+
+//     res.status(200).json({
+//       success: true,
+//       message: "Note updated successfully",
+//       data: updatedNote,
+//     });
+//   } catch (error) {
+//     res.status(500).json({
+//       success: false,
+//       message: error.message,
+//     });
+//   }
+// });
+
 routerNote.put("/note/:id", protect, async (req, res) => {
   try {
-    const updatedNote = await Note.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
+    const { title, description, category, priority, pinned, archived } =
+      req.body;
+
+    const updatedNote = await Note.findOneAndUpdate(
+      {
+        _id: req.params.id,
+        userId: req.user.id,
+      },
+      {
+        title,
+        description,
+        category,
+        priority,
+        pinned,
+        archived,
+      },
+      {
+        new: true,
+        runValidators: true,
+      },
+    );
 
     if (!updatedNote) {
       return res.status(404).json({
@@ -159,21 +194,47 @@ routerNote.put("/note/:id", protect, async (req, res) => {
 });
 
 //Delete Note
+// routerNote.delete("/note/:id", protect, async (req, res) => {
+//   try {
+//     const deleteNote = await Note.findByIdAndDelete(req.params.id, req.body);
+//     if (!deleteNote) {
+//       res.status(404).json({
+//         success: false,
+//         message: "Note not found",
+//       });
+//     }
+//     res.status(200).json({
+//       success: true,
+//       message: "Note Deleted successfully",
+//     });
+//   } catch (error) {
+//     res.status(500).json({
+//       success: false,
+//       message: error.message,
+//     });
+//   }
+// });
+
 routerNote.delete("/note/:id", protect, async (req, res) => {
   try {
-    const deleteNote = await Note.findByIdAndDelete(req.params.id, req.body);
-    if (!deleteNote) {
-      res.status(404).json({
+    const deletedNote = await Note.findOneAndDelete({
+      _id: req.params.id,
+      userId: req.user.id,
+    });
+
+    if (!deletedNote) {
+      return res.status(404).json({
         success: false,
         message: "Note not found",
       });
     }
-    res.status(200).json({
+
+    return res.status(200).json({
       success: true,
-      message: "Note Deleted successfully",
+      message: "Note deleted successfully",
     });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: error.message,
     });
