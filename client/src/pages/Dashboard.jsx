@@ -59,17 +59,37 @@ function Dashboard() {
       archived: "false",
     },
   });
+  // const fetchNotes = async () => {
+  //   try {
+  //     setLoading(true);
+  //     const res = await getNotes(debouncedSearch, page, limit);
+  //     setNotes(res.data);
+  //     setPage(res?.pagination?.
+  //       currentPage)
+  //     SetTotalPage(res?.pagination?.totalPages)
+
+  //   } catch (err) {
+  //     console.log(err);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+
+  // };
+
   const fetchNotes = async () => {
     try {
       setLoading(true);
-      const res = await getNotes(debouncedSearch, page, limit);
-      setNotes(res.data);
-      setPage(res?.pagination?.
-        currentPage)
-      SetTotalPage(res?.pagination?.totalPages)
 
-    } catch (err) {
-      console.log(err);
+      const res = await getNotes(debouncedSearch, page, limit);
+
+      setNotes(res.data);
+      setTotalNotes(res.pagination?.totalNotes ?? 0);
+      SetTotalPage(res.pagination?.totalPages ?? 0);
+    } catch (error) {
+      console.error(
+        "Failed to fetch notes:",
+        error.response?.data || error.message
+      );
     } finally {
       setLoading(false);
     }
